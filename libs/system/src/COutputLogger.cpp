@@ -51,7 +51,7 @@ std::string COutputLogger::logging_levels_to_names[NUMBER_OF_VERBOSITY_LEVELS] =
 		"ERROR"  // LVL_ERROR
 };
 
-COutputLogger::COutputLogger(const std::string& name)
+COutputLogger::COutputLogger(std::string_view name)
 {
 	this->loggerReset();
 	m_logger_name = name;
@@ -59,7 +59,7 @@ COutputLogger::COutputLogger(const std::string& name)
 COutputLogger::COutputLogger() { this->loggerReset(); }
 COutputLogger::~COutputLogger() {}
 void COutputLogger::logStr(
-	const VerbosityLevel level, const std::string& msg_str) const
+	const VerbosityLevel level, std::string_view msg_str) const
 {
 	if (level < m_min_verbosity_level) return;
 
@@ -78,7 +78,7 @@ void COutputLogger::logStr(
 }
 
 void COutputLogger::logFmt(
-	const VerbosityLevel level, const char* fmt, ...) const
+	const VerbosityLevel level, const char *fmt, ...) const
 {
 	// see MRPT/libs/base/src/utils/CDeugOutputCapable.cpp for the iniitial
 	// implementtion
@@ -97,7 +97,7 @@ void COutputLogger::logFmt(
 }
 
 std::string COutputLogger::generateStringFromFormat(
-	const char* fmt, va_list argp) const
+	std::string_view fmt, va_list argp) const
 {
 	int result = -1, length = 1024;
 	std::vector<char> buffer;
@@ -105,7 +105,7 @@ std::string COutputLogger::generateStringFromFormat(
 	while (result == -1)
 	{
 		buffer.resize(length + 10);
-		result = os::vsnprintf(&buffer[0], length, fmt, argp);
+		result = os::vsnprintf(&buffer[0], length, fmt.data(), argp);
 
 		// http://www.cplusplus.com/reference/cstdio/vsnprintf/
 		// only when this returned value is non-negative and less than n, the
@@ -209,7 +209,7 @@ void COutputLogger::loggerReset()
 // ////////////////////////////////////////////////////////////
 
 COutputLogger::TMsg::TMsg(
-	const mrpt::system::VerbosityLevel in_level, const std::string& msg_str,
+	const mrpt::system::VerbosityLevel in_level, std::string_view msg_str,
 	const COutputLogger& logger)
 {
 	this->reset();
