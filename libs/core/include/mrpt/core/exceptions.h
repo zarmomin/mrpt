@@ -10,6 +10,7 @@
 #pragma once
 
 #include <string>  // std::string, to_string()
+#include <string_view>
 #include <stdexcept>  // logic_error
 #include <mrpt/core/common.h>
 #include <mrpt/core/format.h>
@@ -19,9 +20,8 @@
 	throw exceptionClass(                          \
 		throw_typed_exception(msg, __CURRENT_FUNCTION_NAME__, __LINE__))
 
-template <typename T>
 inline std::string throw_typed_exception(
-	const T& msg, const char* function_name, unsigned int line)
+	std::string_view msg, std::string_view function_name, unsigned int line)
 {
 	std::string s = "\n\n =============== MRPT EXCEPTION =============\n";
 	s += function_name;
@@ -56,7 +56,7 @@ inline std::string throw_typed_exception(
 
 template <typename E>
 inline std::string throw_stacked_exception(
-	E&& e, const char* file, unsigned long line, const char* funcName)
+	E&& e, std::string_view file, unsigned long line, std::string_view funcName)
 {
 	std::string s = e.what();
 	s += "\n";
@@ -78,7 +78,7 @@ inline std::string throw_stacked_exception(
 	throw std::logic_error(throw_stacked_exception_custom_msg2(e, stuff, param1))
 template <typename E, typename T>
 inline std::string throw_stacked_exception_custom_msg2(
-	E&& e, const char* stuff, T&& param1)
+	E&& e, std::string_view stuff, T&& param1)
 {
 	std::string s = e.what();
 	s += mrpt::format(stuff, param1);
@@ -101,7 +101,7 @@ inline std::string throw_stacked_exception_custom_msg2(
 #define ASSERTMSG_(f, __ERROR_MSG)                             \
 	do                                                         \
 	{                                                          \
-		if (!(f)) THROW_EXCEPTION(::std::string(__ERROR_MSG)); \
+		if (!(f)) THROW_EXCEPTION(__ERROR_MSG); \
 	} while (0)
 
 /** Defines an assertion mechanism.
@@ -111,7 +111,7 @@ inline std::string throw_stacked_exception_custom_msg2(
  * \sa MRPT_TRY_START, MRPT_TRY_END
  */
 #define ASSERT_(f) \
-	ASSERTMSG_(f, std::string("Assert condition failed: ") + ::std::string(#f))
+	ASSERTMSG_(f, ::std::string("Assert condition failed: ") + ::std::string(#f))
 
 /** Throws an exception if the number is NaN, IND, or +/-INF, or return the same
  * number otherwise. */
@@ -131,7 +131,7 @@ inline std::string throw_stacked_exception_custom_msg2(
 	THROW_EXCEPTION(asrt_fail(__CONDITIONSTR, __A, __B, __ASTR, __BSTR))
 template <typename A, typename B>
 inline std::string asrt_fail(
-	std::string s, A&& a, B&& b, const char* astr, const char* bstr)
+	std::string s, A&& a, B&& b, std::string_view astr, std::string_view bstr)
 {
 	s += "(";
 	s += astr;
