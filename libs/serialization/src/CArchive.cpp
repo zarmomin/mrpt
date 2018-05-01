@@ -537,17 +537,12 @@ void CArchive::ReadObject(CSerializable* existingObj)
 	ASSERT_(strClassName != "nullptr");
 
 	const TRuntimeClassId* id = existingObj->GetRuntimeClass();
-	const TRuntimeClassId* id2 = mrpt::rtti::findRegisteredClass(strClassName);
 
-	if (!id2)
-		THROW_EXCEPTION_FMT(
-			"Stored object has class '%s' which is not registered!",
-			strClassName.c_str());
-	if (id != id2)
+	if (id->className != strClassName)
 		THROW_EXCEPTION(format(
 			"Stored class does not match with existing object!!:\n Stored: "
 			"%s\n Expected: %s",
-			id2->className, id->className));
+			strClassName.c_str(), id->className));
 
 	internal_ReadObject(existingObj, strClassName, isOldFormat, version);
 }

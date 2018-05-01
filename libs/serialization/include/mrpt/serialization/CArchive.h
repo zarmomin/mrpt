@@ -232,6 +232,18 @@ class CArchive
 	}
 
    public:
+	template <typename T, typename ... REST>
+	const mrpt::rtti::TRuntimeClassId* findRegisteredClassInList(std::string_view strClassName)
+	{
+		return T::GetRuntimeClassIdStatic().className == strClassName ? &T::GetRuntimeClassIdStatic() : findRegisteredClassInList<REST...>(strClassName);
+	}
+
+	template <typename T>
+	const mrpt::rtti::TRuntimeClassId* findRegisteredClassInList(std::string_view strClassName)
+	{
+		return T::GetRuntimeClassIdStatic().className == strClassName ? &T::GetRuntimeClassIdStatic() : nullptr;
+	}
+
 	/** Reads a variant from stream, its class determined at runtime, and
 	 * returns a variant to the object.
 	 * To be compatible with the current polymorphic system this support smart
@@ -252,7 +264,7 @@ class CArchive
 		int8_t version;
 		internal_ReadObjectHeader(strClassName, isOldFormat, version);
 		const mrpt::rtti::TRuntimeClassId* classId =
-			mrpt::rtti::findRegisteredClass(strClassName);
+			findRegisteredClassInList<T...>(strClassName);
 		if (!classId)
 			THROW_EXCEPTION_FMT(
 				"Stored object has class '%s' which is not registered!",

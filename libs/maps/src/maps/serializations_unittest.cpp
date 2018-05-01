@@ -71,8 +71,20 @@ TEST(SerializeTestMaps, WriteReadToMem)
 				delete o;
 			}
 
-			CSerializable::Ptr recons;
-			buf.Seek(0);
+			std::variant<
+				CBeacon,
+				CBeaconMap,
+				CColouredPointsMap,
+				CGasConcentrationGridMap2D,
+				CWirelessPowerGridMap2D,
+				CHeightGridMap2D,
+				CReflectivityGridMap2D,
+				COccupancyGridMap2D,
+				CSimplePointsMap,
+				CRandomFieldGridMap3D,
+				CWeightedPointsMap,
+				COctoMap,
+				CColouredOctoMap>  recons;
 			arch >> recons;
 		}
 		catch (std::exception& e)
