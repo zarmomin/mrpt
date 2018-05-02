@@ -23,7 +23,7 @@ using namespace std;
 using namespace mrpt::serialization;
 using namespace mrpt::serialization::metaprogramming;
 
-IMPLEMENTS_SERIALIZABLE(CSimpleMap, CSerializable, mrpt::maps)
+IMPLEMENTS_MRPT_OBJECT_ALT_NAME(CSimpleMap, CSerializable, mrpt::maps, "CSensFrameProbSequence")
 
 const auto fn_pair_make_unique = [](auto& ptr) {
 	ptr.first.reset(dynamic_cast<mrpt::poses::CPose3DPDF*>(ptr.first->clone()));

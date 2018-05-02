@@ -35,6 +35,7 @@ struct TRuntimeClassId
 	mrpt::rtti::CObject* (*ptrCreateObject)();
 	/** Gets the base class runtime id. */
 	const TRuntimeClassId* (*getBaseClass)();
+	const char *altName;
 
 	// Operations
 	mrpt::rtti::CObject* createObject() const;
@@ -213,7 +214,7 @@ inline mrpt::rtti::CObject::Ptr CObject::duplicateGetSmartPtr() const
 
 /** This must be inserted in all CObject classes implementation files
  */
-#define IMPLEMENTS_MRPT_OBJECT(class_name, base, NameSpace)                   \
+#define IMPLEMENTS_MRPT_OBJECT_ALT_NAME(class_name, base, NameSpace, alt_name)                   \
 	mrpt::rtti::CObject* NameSpace::class_name::CreateObject()                \
 	{                                                                         \
 		return static_cast<mrpt::rtti::CObject*>(new NameSpace::class_name);  \
@@ -229,7 +230,7 @@ inline mrpt::rtti::CObject::Ptr CObject::duplicateGetSmartPtr() const
 	}                                                                         \
 	const mrpt::rtti::TRuntimeClassId NameSpace::class_name::runtimeClassId = \
 		{#class_name, NameSpace::class_name::CreateObject,                    \
-		 &class_name::_GetBaseClass};                                         \
+		 &class_name::_GetBaseClass, alt_name};                                         \
 	const mrpt::rtti::TRuntimeClassId*                                        \
 		NameSpace::class_name::GetRuntimeClass() const                        \
 	{                                                                         \
@@ -242,6 +243,8 @@ inline mrpt::rtti::CObject::Ptr CObject::duplicateGetSmartPtr() const
 		return static_cast<mrpt::rtti::CObject*>(                             \
 			new NameSpace::class_name(*this));                                \
 	}
+
+#define IMPLEMENTS_MRPT_OBJECT(class_name, base, NameSpace) IMPLEMENTS_MRPT_OBJECT_ALT_NAME(class_name, base, NameSpace, nullptr)
 
 /** This declaration must be inserted in virtual CObject classes
  * definition:

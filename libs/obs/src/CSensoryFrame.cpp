@@ -21,7 +21,7 @@ using namespace mrpt::poses;
 using namespace mrpt::system;
 using namespace std;
 
-IMPLEMENTS_SERIALIZABLE(CSensoryFrame, CSerializable, mrpt::obs)
+IMPLEMENTS_MRPT_OBJECT_ALT_NAME(CSensoryFrame, CSerializable, mrpt::obs, "CSensorialFrame")
 
 CSensoryFrame::CSensoryFrame(const CSensoryFrame& o) : m_observations()
 {

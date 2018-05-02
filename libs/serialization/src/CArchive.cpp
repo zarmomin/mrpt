@@ -538,7 +538,7 @@ void CArchive::ReadObject(CSerializable* existingObj)
 
 	const TRuntimeClassId* id = existingObj->GetRuntimeClass();
 
-	if (id->className != strClassName)
+	if (id->className != strClassName && id->altName != strClassName)
 		THROW_EXCEPTION(format(
 			"Stored class does not match with existing object!!:\n Stored: "
 			"%s\n Expected: %s",

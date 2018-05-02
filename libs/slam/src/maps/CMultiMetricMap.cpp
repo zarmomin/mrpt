@@ -21,7 +21,7 @@ using namespace mrpt::obs;
 using namespace mrpt::tfest;
 using namespace mrpt::serialization::metaprogramming;
 
-IMPLEMENTS_SERIALIZABLE(CMultiMetricMap, CMetricMap, mrpt::maps)
+IMPLEMENTS_MRPT_OBJECT_ALT_NAME(CMultiMetricMap, CMetricMap, mrpt::maps, "CHybridMetricMap")
 
 // ------------------------------------------------------------------------
 // A few words explaining how all this works:
