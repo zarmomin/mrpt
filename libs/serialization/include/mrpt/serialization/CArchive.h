@@ -232,16 +232,16 @@ class CArchive
 	}
 
    public:
-	template <typename T, typename ... REST>
+	template <typename T, typename T2, typename ... REST>
 	const mrpt::rtti::TRuntimeClassId* findRegisteredClassInList(std::string_view strClassName)
 	{
-		return T::GetRuntimeClassIdStatic().className == strClassName ? &T::GetRuntimeClassIdStatic() : findRegisteredClassInList<REST...>(strClassName);
+		return T::GetRuntimeClassIdStatic().className == strClassName ? &T::GetRuntimeClassIdStatic() : findRegisteredClassInList<T2, REST...>(strClassName);
 	}
 
 	template <typename T>
 	const mrpt::rtti::TRuntimeClassId* findRegisteredClassInList(std::string_view strClassName)
 	{
-		return T::GetRuntimeClassIdStatic().className == strClassName ? &T::GetRuntimeClassIdStatic() : nullptr;
+	        return T::GetRuntimeClassIdStatic().className == strClassName ? &T::GetRuntimeClassIdStatic() : nullptr;
 	}
 
 	/** Reads a variant from stream, its class determined at runtime, and

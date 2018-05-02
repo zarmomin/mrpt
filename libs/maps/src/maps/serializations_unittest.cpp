@@ -71,6 +71,7 @@ TEST(SerializeTestMaps, WriteReadToMem)
 				delete o;
 			}
 
+			buf.Seek(0);
 			std::variant<
 				CBeacon,
 				CBeaconMap,
