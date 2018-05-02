@@ -235,14 +235,14 @@ class CArchive
 	template <typename T, typename T2, typename ... REST>
 	const mrpt::rtti::TRuntimeClassId* findRegisteredClassInList(std::string_view strClassName)
 	{
-		return T::GetRuntimeClassIdStatic().className == strClassName || T::GetRuntimeClassIdStatic().altName ?
+		return T::GetRuntimeClassIdStatic().className == strClassName || T::GetRuntimeClassIdStatic().altName == strClassName ?
 		       	&T::GetRuntimeClassIdStatic() : findRegisteredClassInList<T2, REST...>(strClassName);
 	}
 
 	template <typename T>
 	const mrpt::rtti::TRuntimeClassId* findRegisteredClassInList(std::string_view strClassName)
 	{
-		return T::GetRuntimeClassIdStatic().className == strClassName || T::GetRuntimeClassIdStatic().altName ?
+		return T::GetRuntimeClassIdStatic().className == strClassName || T::GetRuntimeClassIdStatic().altName == strClassName ?
 		       	&T::GetRuntimeClassIdStatic() : nullptr;
 	}
 
