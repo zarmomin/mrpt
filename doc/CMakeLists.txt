@@ -4,10 +4,11 @@ INCLUDE(../cmakemodules/AssureCMakeRootFile.cmake) # Avoid user mistake in CMake
 # Dummy documentation target for showing grouped files in IDEs:
 # ----------------------------------------------------------------------------
 FILE(GLOB DOX_HDRS "${CMAKE_SOURCE_DIR}/doc/doxygen-pages/*.h")
+FILE(GLOB_RECURSE RST_FILES "${CMAKE_SOURCE_DIR}/doc/*.rst")
 SET(DOC_INDIV_FILES
 	"${CMAKE_SOURCE_DIR}/README.md"
 	)
-SET(all_docs_files ${DOX_HDRS} ${DOC_INDIV_FILES})
+SET(all_docs_files ${DOX_HDRS} ${RST_FILES} ${DOC_INDIV_FILES})
 add_custom_target(DocumentationFiles DEPENDS ${all_docs_files} SOURCES ${all_docs_files})
 set_target_properties(DocumentationFiles PROPERTIES FOLDER "documentation")
 
@@ -37,62 +38,24 @@ if(TARGET mrpt-perfdata2html)
 	set_target_properties(documentation_performance_html PROPERTIES FOLDER "documentation")
 endif()
 
-IF(DOXYGEN_EXECUTABLE)
+if(DOXYGEN_EXECUTABLE)
 	# --------------------------------
 	#   documentation_html
 	# --------------------------------
-	IF(WIN32)
-		SET(CMD build_docs-HTML.bat)
-	ELSE()
-		SET(CMD "build_docs.sh")
-		SET(PARAM "-h")
-	ENDIF()
 	add_custom_target(documentation_html
-		COMMAND 		${MRPT_SOURCE_DIR}/scripts/${CMD} ${PARAM}
-		WORKING_DIRECTORY	${MRPT_SOURCE_DIR}/
-		COMMENT 		"Generating MRPT documentation (html)"
+		COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build.py ${MRPT_VERSION}
+		COMMENT "Generating MRPT documentation (html)"
+		SOURCES build.py conf.py _templates/layout.html ${RST_FILES}
 		)
 	set_target_properties(documentation_html PROPERTIES FOLDER "documentation")
-
-	# --------------------------------
-	#   documentation_chm
-	# --------------------------------
-	IF(WIN32)
-		SET(CMD build_docs-CHM.bat)
-	ELSE()
-		SET(CMD "build_docs.sh")
-		SET(PARAM "-c")
-	ENDIF()
-	add_custom_target(documentation_chm
-		COMMAND 		${MRPT_SOURCE_DIR}/scripts/${CMD} ${PARAM}
-		WORKING_DIRECTORY	${MRPT_SOURCE_DIR}/
-		COMMENT 		"Generating MRPT documentation (chm)"
-		)
-	set_target_properties(documentation_chm PROPERTIES FOLDER "documentation")
-
-	# --------------------------------
-	#   documentation_html_chm
-	# --------------------------------
-	IF(WIN32)
-		SET(CMD build_docs-HTML-CHM.bat)
-	ELSE()
-		SET(CMD "build_docs.sh")
-		SET(PARAM "-ch")
-	ENDIF()
-	add_custom_target(documentation_html_chm
-		COMMAND 		${MRPT_SOURCE_DIR}/scripts/${CMD} ${PARAM}
-		WORKING_DIRECTORY	${MRPT_SOURCE_DIR}/
-		COMMENT 		"Generating MRPT documentation (html+chm)"
-		)
-	set_target_properties(documentation_html_chm PROPERTIES FOLDER "documentation")
-ENDIF()
+endif()
 
 
 # Compile Latex targets:
-IF(NOT WIN32)
+if(NOT WIN32)
 find_program(LATEXMK_PROGRAM latexmk)
 mark_as_advanced(LATEXMK_PROGRAM)
-IF(LATEXMK_PROGRAM)
+if(LATEXMK_PROGRAM)
 	# The main (empty) target:
 	add_custom_target(documentation_psgz_guides)
 
@@ -110,5 +73,5 @@ IF(LATEXMK_PROGRAM)
 		)
 	add_dependencies(documentation_psgz_guides documentation_graphslam-engine-guide)
 
-ENDIF()
-ENDIF()
+endif()
+endif()
