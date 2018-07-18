@@ -43,7 +43,7 @@ if(DOXYGEN_EXECUTABLE)
 	#   documentation_html
 	# --------------------------------
 	add_custom_target(documentation_html
-		COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build.py ${MRPT_VERSION}
+		COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build.py ${CMAKE_MRPT_FULL_VERSION}
 		COMMENT "Generating MRPT documentation (html)"
 		SOURCES build.py conf.py _templates/layout.html ${RST_FILES}
 		)

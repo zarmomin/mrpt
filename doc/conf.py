@@ -20,13 +20,13 @@
 # -- Project information -----------------------------------------------------
 
 project = u'MRPT'
-copyright = u'2018, José Luis Blanco-Claraco'
+copyright = u'2005-2018, Individual contributors'
 author = u'José Luis Blanco-Claraco'
 
 # The short X.Y version
-version = u''
+#version = u'1.9'
 # The full version, including alpha/beta/rc tags
-release = u''
+#release = u'1.9.9'
 
 
 # -- General configuration ---------------------------------------------------
@@ -43,7 +43,11 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
+    'breathe'
 ]
+
+breathe_default_project = "mrpt"
+breathe_domain_by_extension = {"h" : "cpp"}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -72,19 +76,25 @@ exclude_patterns = [u'_build', 'Thumbs.db', '.DS_Store']
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
+highlight_language = 'c++'
+primary_domain = 'cpp'
+
 
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'basic-bootstrap'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
 # html_theme_options = {}
+
+# Add any paths that contain custom themes here, relative to this directory.
+html_theme_path = ['.']
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -99,7 +109,9 @@ html_static_path = ['_static']
 # default: ``['localtoc.html', 'relations.html', 'sourcelink.html',
 # 'searchbox.html']``.
 #
-# html_sidebars = {}
+html_sidebars = {
+  '**': ['localtoc.html', 'relations.html', 'sourcelink.html', 'searchbox.html']
+}
 
 
 # -- Options for HTMLHelp output ---------------------------------------------
