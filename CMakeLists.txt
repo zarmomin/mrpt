@@ -263,6 +263,7 @@ include(cmakemodules/script_clang_tidy.cmake REQUIRED)  # Clang tidy
 include(cmakemodules/script_iwyu.cmake REQUIRED)        # Include-what-you-use
 include(cmakemodules/script_cvd.cmake REQUIRED)         # Check for VTK
 include(cmakemodules/script_jsoncpp.cmake REQUIRED)     # Check for jsoncpp
+include(cmakemodules/script_nanogui.cmake REQUIRED)     # Check for nanogui
 
 # ---------------------------------------------------------------------------
 #			OPTIONS
