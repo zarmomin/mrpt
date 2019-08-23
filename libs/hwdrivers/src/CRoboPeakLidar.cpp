@@ -19,7 +19,7 @@ IMPLEMENTS_GENERIC_SENSOR(CRoboPeakLidar, mrpt::hwdrivers)
 #if MRPT_HAS_ROBOPEAK_LIDAR
 #include "rplidar.h"  // RPLidar API
 using namespace rp::standalone::rplidar;
-#define RPLIDAR_DRV static_cast<RPlidarDriver*>(m_rplidar_drv)
+#define RPLIDAR_DRV() static_cast<RPlidarDriver*>(m_rplidar_drv)
 #endif
 
 using namespace mrpt::obs;

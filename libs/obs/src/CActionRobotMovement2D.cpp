@@ -677,7 +677,8 @@ void CActionRobotMovement2D::prepareFastDrawSingleSample_modelThrun() const {}
 void CActionRobotMovement2D::fastDrawSingleSample_modelGaussian(
 	CPose2D& outSample) const
 {
-	CVectorFloat rndVector(3, 0);
+	CVectorFloat rndVector;
+	rndVector.assign(3, 0.0f);
 	for (size_t i = 0; i < 3; i++)
 	{
 		float rnd = getRandomGenerator().drawGaussian1D_normalized();

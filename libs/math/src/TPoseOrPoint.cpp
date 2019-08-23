@@ -1571,23 +1571,23 @@ void TObject3D::getPolygons(
 
 CArchive& operator>>(CArchive& in, mrpt::math::TTwist2D& o)
 {
-	for (unsigned int i = 0; i < o.size(); i++) in >> o[i];
+	for (size_t i = 0; i < o.size(); i++) in >> o[i];
 	return in;
 }
 CArchive& operator<<(CArchive& out, const mrpt::math::TTwist2D& o)
 {
-	for (unsigned int i = 0; i < o.size(); i++) out << o[i];
+	for (size_t i = 0; i < o.size(); i++) out << o[i];
 	return out;
 }
 
 CArchive& operator>>(CArchive& in, mrpt::math::TTwist3D& o)
 {
-	for (unsigned int i = 0; i < o.size(); i++) in >> o[i];
+	for (size_t i = 0; i < o.size(); i++) in >> o[i];
 	return in;
 }
 CArchive& operator<<(CArchive& out, const mrpt::math::TTwist3D& o)
 {
-	for (unsigned int i = 0; i < o.size(); i++) out << o[i];
+	for (size_t i = 0; i < o.size(); i++) out << o[i];
 	return out;
 }
 
