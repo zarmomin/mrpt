@@ -24,24 +24,23 @@ define_mrpt_lib(
 	mrpt-obs
 	)
 
-if(BUILD_mrpt-ros1bridge)
-	# Add the required libraries for linking:
-	target_link_libraries(ros1bridge
-		PUBLIC
-		${roscpp_LIBRARIES}
-		${rosbag_LIBRARIES}
-		${cv_bridge_LIBRARIES}
-		${pcl_conversions_LIBRARIES}
-		${tf2_LIBRARIES}
-	)
 
-	target_include_directories(ros1bridge
-		SYSTEM
-		PUBLIC
-		${roscpp_INCLUDE_DIRS}
-		${rosbag_INCLUDE_DIRS}
-		${cv_bridge_INCLUDE_DIRS}
-		${pcl_conversions_INCLUDE_DIRS}
-		${tf2_INCLUDE_DIRS}
-	)
-endif()
+# Add the required libraries for linking:
+target_link_libraries(ros1bridge
+	PUBLIC
+	${roscpp_LIBRARIES}
+	${rosbag_LIBRARIES}
+	${cv_bridge_LIBRARIES}
+	${pcl_conversions_LIBRARIES}
+	${tf2_LIBRARIES}
+)
+
+target_include_directories(ros1bridge
+	SYSTEM
+	PUBLIC
+	${roscpp_INCLUDE_DIRS}
+	${rosbag_INCLUDE_DIRS}
+	${cv_bridge_INCLUDE_DIRS}
+	${pcl_conversions_INCLUDE_DIRS}
+	${tf2_INCLUDE_DIRS}
+)
