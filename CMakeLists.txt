@@ -293,6 +293,10 @@ if(NOT MSVC)
 	endif()
 endif()
 
+find_package(SuiteSparse REQUIRED)
+if(SuiteSparse_FOUND)
+	set(CMAKE_MRPT_HAS_SUITESPARSE 1)
+endif()
 
 set(CMAKE_MRPT_HAS_GZ_STREAMS ${CMAKE_MRPT_HAS_ZLIB})   # We have gz-streams is we have zlib:
 
