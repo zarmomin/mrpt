@@ -298,7 +298,6 @@ set(CMAKE_MRPT_HAS_GZ_STREAMS ${CMAKE_MRPT_HAS_ZLIB})   # We have gz-streams is 
 
 include(cmakemodules/script_kinect.cmake REQUIRED)  # Kinect support in a set of different ways
 include(cmakemodules/script_pcl.cmake REQUIRED)     # PCL library
-include(cmakemodules/script_suitesparse.cmake REQUIRED)     # SuiteSparse libs
 
 # Save the basic list of libraries (without MRPT-libs):
 # -------------------------------------------------------------------------------------
