@@ -27,7 +27,7 @@ target_link_libraries(${PROJECT_NAME}
 	${rosbag_LIBRARIES}
 	${cv_bridge_LIBRARIES}
 	${tf2_LIBRARIES}
-	${LIBYAMLCPP_LIBRARIES}
+	${YamlCpp_LIBRARIES}
 )
 
 target_include_directories(${PROJECT_NAME}
