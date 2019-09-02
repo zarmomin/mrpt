@@ -293,9 +293,17 @@ if(NOT MSVC)
 	endif()
 endif()
 
-find_package(SuiteSparse REQUIRED)
-if(SuiteSparse_FOUND)
+#todo: generalize this one
+list(APPEND CMAKE_PREFIX_PATH "/home/nico/maplab_ws/devel/share/suitesparse/cmake")
+
+find_package(suitesparse REQUIRED)
+
+# remap from suitesparse to SuiteSparse to help CMake along
+if(suitesparse_FOUND)
 	set(CMAKE_MRPT_HAS_SUITESPARSE 1)
+	set(SuiteSparse_LIBRARIES ${suitesparse_LIBRARIES})
+	set(SuiteSparse_INCLUDE_DIRS ${suitesparse_INCLUDE_DIRS})
+	set(SuiteSparse_FOUND ${suitesparse_FOUND})
 endif()
 
 set(CMAKE_MRPT_HAS_GZ_STREAMS ${CMAKE_MRPT_HAS_ZLIB})   # We have gz-streams is we have zlib:
