@@ -43,7 +43,7 @@ if (EIGEN_USE_EMBEDDED_VERSION)
 
 else()
 	find_package(Eigen3 QUIET NO_MODULE)
-
+  message("Eigen dirs: ${EIGEN3_INCLUDE_DIR}")
 	if(Eigen3_FOUND)
 		# Use system version
 		set(MRPT_EIGEN_INCLUDE_DIR "${EIGEN3_INCLUDE_DIR}") # only to find out version
