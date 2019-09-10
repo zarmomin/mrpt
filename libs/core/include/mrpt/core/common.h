@@ -126,7 +126,7 @@ need to account for this with an extra offset.
 #endif
 
 #define MRPT_WARNING(x) MRPT_MSG_PRAGMA("Warning: " x)
-#define MRPT_TODO(x) do {} while(0)
+#define MRPT_TODO(x)
 
 // Define a decl. modifier for printf-like format checks at compile time:
 #ifdef __GNUC__
