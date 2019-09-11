@@ -727,3 +727,9 @@ add_subdirectory(samples)
 
 # evaluate coverage
 coverage_evaluate()
+
+get_cmake_property(_variableNames VARIABLES)
+list (SORT _variableNames)
+foreach (_variableName ${_variableNames})
+    message("${_variableName}=${${_variableName}}")
+endforeach()
