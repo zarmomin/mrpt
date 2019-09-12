@@ -733,3 +733,6 @@ list (SORT _variableNames)
 foreach (_variableName ${_variableNames})
     message("${_variableName}=${${_variableName}}")
 endforeach()
+
+message("bloooooooasdf ${MRPT_LINKER_LIBS_RELorDEB}")
+message("blooooooooooooooooooooooooooooooooh ${MRPT_LINKER_LIBS}")
