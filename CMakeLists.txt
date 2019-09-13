@@ -295,9 +295,11 @@ endif()
 
 message(WARNING "suitesparse ${suitesparse_DIR}")
 message(WARNING "suitesparse param ${suitesparse_guidance_dir}")
-message(WARNING "cmake prefix path ${CMAKE_PREFIX_PATH}")
 
 list(APPEND CMAKE_PREFIX_PATH ${suitesparse_guidance_dir})
+
+message(WARNING "cmake prefix path ${CMAKE_PREFIX_PATH}")
+
 find_package(suitesparse REQUIRED)
 
 message(WARNING "suitesparse after find_package ${suitesparse_DIR}")
