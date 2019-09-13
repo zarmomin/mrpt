@@ -293,8 +293,9 @@ if(NOT MSVC)
 	endif()
 endif()
 
-#todo: generalize this one
-list(APPEND CMAKE_PREFIX_PATH "/home/nico/maplab_ws/devel/share/suitesparse/cmake")
+message(WARNING "suitesparse ${suitesparse_DIR}")
+message(WARNING "suitesparse param ${suitesparse_guidance_dir}")
+message(WARNING "cmake prefix path ${CMAKE_PREFIX_PATH}")
 
 find_package(suitesparse REQUIRED)
 
